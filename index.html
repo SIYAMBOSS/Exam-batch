@@ -1,25 +1,54 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>অনলাইন এক্সাম প্ল্যাটফর্ম</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Siyam Dashboard</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 50px; }
+        .hidden { display: none; }
+        .dashboard-btn { padding: 15px 30px; margin: 10px; cursor: pointer; display: block; width: 200px; margin-left: auto; margin-right: auto; }
+    </style>
 </head>
 <body>
 
-    <div class="quiz-container">
-        <h2>অনলাইন মডেল টেস্ট</h2>
-        <div id="quiz">
-            <div class="question" id="question">প্রশ্ন এখানে লোড হবে...</div>
-            <div class="options" id="options">
-                <!-- অপশনগুলো এখানে জাভাস্ক্রিপ্ট দ্বারা যুক্ত হবে -->
-            </div>
-        </div>
-        <button id="next-btn" onclick="nextQuestion()">পরবর্তী প্রশ্ন</button>
-        <div id="result" class="result"></div>
+    <!-- লগইন সেকশন -->
+    <div id="login-section">
+        <h2>লগইন করুন</h2>
+        <input type="email" id="email" placeholder="ইমেইল দিন"><br><br>
+        <input type="password" id="password" placeholder="পাসওয়ার্ড দিন"><br><br>
+        <button onclick="checkLogin()">Login</button>
     </div>
 
-    <script src="app.js"></script>
+    <!-- ড্যাশবোর্ড সেকশন -->
+    <div id="dashboard" class="hidden">
+        <h1>স্বাগতম, Siyam!</h1>
+        <button class="dashboard-btn" onclick="showSection('home')">Home</button>
+        <button class="dashboard-btn" onclick="showSection('exam')">Exam</button>
+        <button class="dashboard-btn" onclick="showSection('profile')">Profile</button>
+        <button class="dashboard-btn" onclick="showSection('leaderboard')">Leaderboard</button>
+        <button class="dashboard-btn" onclick="location.reload()" style="background: red; color: white;">Logout</button>
+    </div>
+
+    <div id="content-area"></div>
+
+    <script>
+        function checkLogin() {
+            const email = document.getElementById('email').value;
+            const pass = document.getElementById('password').value;
+
+            if (email === "siyam19065@gmail.com" && pass === "Siyam123@#") {
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('dashboard').classList.remove('hidden');
+            } else {
+                alert("ভুল ইমেইল বা পাসওয়ার্ড!");
+            }
+        }
+
+        function showSection(section) {
+            const area = document.getElementById('content-area');
+            area.innerHTML = `<h2>আপনি এখন ${section.toUpperCase()} সেকশনে আছেন</h2>`;
+        }
+    </script>
 </body>
 </html>
+
