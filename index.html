@@ -1,54 +1,370 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
     <meta charset="UTF-8">
-    <title>Siyam Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>প্রো এক্সাম ড্যাশবোর্ড | ন্যানো টেকনোলজি</title>
+    <!-- Google Fonts (Poppins & Noto Sans Bengali) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        body { font-family: sans-serif; text-align: center; padding: 50px; }
-        .hidden { display: none; }
-        .dashboard-btn { padding: 15px 30px; margin: 10px; cursor: pointer; display: block; width: 200px; margin-left: auto; margin-right: auto; }
-    </style>
-</head>
-<body>
-
-    <!-- লগইন সেকশন -->
-    <div id="login-section">
-        <h2>লগইন করুন</h2>
-        <input type="email" id="email" placeholder="ইমেইল দিন"><br><br>
-        <input type="password" id="password" placeholder="পাসওয়ার্ড দিন"><br><br>
-        <button onclick="checkLogin()">Login</button>
-    </div>
-
-    <!-- ড্যাশবোর্ড সেকশন -->
-    <div id="dashboard" class="hidden">
-        <h1>স্বাগতম, Siyam!</h1>
-        <button class="dashboard-btn" onclick="showSection('home')">Home</button>
-        <button class="dashboard-btn" onclick="showSection('exam')">Exam</button>
-        <button class="dashboard-btn" onclick="showSection('profile')">Profile</button>
-        <button class="dashboard-btn" onclick="showSection('leaderboard')">Leaderboard</button>
-        <button class="dashboard-btn" onclick="location.reload()" style="background: red; color: white;">Logout</button>
-    </div>
-
-    <div id="content-area"></div>
-
-    <script>
-        function checkLogin() {
-            const email = document.getElementById('email').value;
-            const pass = document.getElementById('password').value;
-
-            if (email === "siyam19065@gmail.com" && pass === "Siyam123@#") {
-                document.getElementById('login-section').style.display = 'none';
-                document.getElementById('dashboard').classList.remove('hidden');
-            } else {
-                alert("ভুল ইমেইল বা পাসওয়ার্ড!");
-            }
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary-color: #3b82f6; /* আধুনিক ব্লু */
+            --secondary-color: #10b981; /* সাকসেস গ্রিন */
+            --bg-color: #f0f2f5;
+            --sidebar-color: #ffffff;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --font-primary: 'Poppins', sans-serif;
+            --font-bengali: 'Noto Sans Bengali', sans-serif;
         }
 
-        function showSection(section) {
-            const area = document.getElementById('content-area');
-            area.innerHTML = `<h2>আপনি এখন ${section.toUpperCase()} সেকশনে আছেন</h2>`;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-    </script>
-</body>
-</html>
 
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- LOGIN SECTION (Initial State) --- */
+        #login-section {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135h, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .login-box h2 {
+            font-family: var(--font-bengali);
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .login-box p { color: var(--text-light); margin-bottom: 30px; }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-family: var(--font-bengali);
+        }
+
+        .login-btn:hover { background: #2563eb; }
+
+        .error-msg {
+            color: #ef4444;
+            margin-top: 10px;
+            font-size: 14px;
+            display: none;
+        }
+
+        /* --- DASHBOARD LAYOUT (Hidden by default) --- */
+        #dashboard-section {
+            display: none;
+            width: 100%;
+            display: flex;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: var(--sidebar-color);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .brand-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-logo img { width: 40px; height: 40px; }
+
+        .nav-links { list-style: none; }
+
+        .nav-links li { margin-bottom: 15px; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-light);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-radius: 12px;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-family: var(--font-bengali);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary-color);
+        }
+
+        .nav-links a i { width: 20px; text-align: center; }
+
+        .logout-link { margin-top: auto; color: #ef4444 !important; }
+        .logout-link:hover { background: rgba(239, 68, 68, 0.1) !important; }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            padding: 40px;
+            transition: margin-left 0.3s ease;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .welcome-text h1 { font-size: 28px; font-weight: 700; color: var(--text-dark); }
+        .welcome-text p { color: var(--text-light); margin-top: 5px; }
+
+        .header-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .header-profile img { width: 40px; height: 40px; border-radius: 50%; }
+        .header-profile span { font-weight: 600; }
+
+        /* Dashboard Sections */
+        .content-section { display: none; opacity: 0; transition: opacity 0.5s ease; }
+        .content-section.active-section { display: block; opacity: 1; }
+
+        /* Cards Grid */
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover { transform: translateY(-5px); }
+
+        .icon-box {
+            width: 60px; height: 60px;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+
+        .stat-details h3 { font-size: 16px; color: var(--text-light); margin-bottom: 5px; }
+        .stat-details p { font-size: 24px; font-weight: 700; color: var(--text-dark); }
+
+        /* Colors for icons */
+        .bg-blue { background-color: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+        .bg-green { background-color: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .bg-yellow { background-color: rgba(245, 158, 11, 0.1); color: #f59e0b; }
+        .bg-red { background-color: rgba(239, 68, 68, 0.1); color: #ef4444; }
+
+        /* Exam Cards */
+        .exam-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .exam-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exam-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 5px; height: 100%;
+            background: var(--primary-color);
+        }
+
+        .exam-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .exam-type {
+            font-size: 12px; font-weight: 600;
+            color: var(--primary-color);
+            background: rgba(59, 130, 246, 0.1);
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .exam-status { font-size: 12px; color: var(--secondary-color); }
+
+        .exam-card h3 { font-family: var(--font-bengali); font-size: 18px; margin-bottom: 10px; }
+        .exam-meta { display: flex; gap: 15px; font-size: 14px; color: var(--text-light); margin-bottom: 15px; }
+        .exam-meta span { display: flex; align-items: center; gap: 5px; }
+
+        .start-exam-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            font-family: var(--font-bengali);
+        }
+        
+        .start-exam-btn:hover { background: #2563eb; }
+
+        /* Profile Section */
+        .profile-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .profile-large-img { width: 120px; height: 120px; border-radius: 50%; margin-bottom: 20px; border: 5px solid var(--bg-color); }
+        .profile-card h2 { font-size: 24px; margin-bottom: 10px; }
+        .profile-card p.email { color: var(--text-light); margin-bottom: 20px; }
+        
+        .profile-stats {
+            display: flex; justify-content: center; gap: 30px;
+            border-top: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+        .p-stat-box h4 { font-size: 14px; color: var(--text-light); }
+        .p-stat-box p { font-size: 20px; font-weight: 700; color: var(--primary-color); }
+
+        .edit-profile-btn {
+            padding: 10px 30px;
+            background: var(--bg-color);
+            color: var(--text-dark);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Leaderboard Table */
+        .leaderboard-table {
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+        th, td { text-align: left; padding: 20px; border-bottom: 1px solid #e5e7eb; font-family: var(--font-bengali); }
+        th { background: #f9fafb; font-weight: 600; color: var(--text-light); font-family: var(--font-primary); font-size: 14px;}
+        
+        .rank-cell { display: flex; align-items: center;
