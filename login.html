@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nano Exam - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="login-screen">
+        <div class="login-card">
+            <h2>Nano Exam Portal</h2>
+            <p>Login with Email or Phone</p>
+            
+            <div class="input-group">
+                <i class="fa-solid fa-user-shield"></i>
+                <input type="text" id="login-identifier" placeholder="Email or Phone Number">
+            </div>
+            
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="login-pass" placeholder="Password">
+            </div>
+
+            <button class="login-btn" onclick="handleLogin()">Login</button>
+            <div id="error-msg" class="error-text">Invalid credentials!</div>
+            <p style="margin-top: 20px; font-size: 14px;">Don't have an account? <a href="register.html" style="color: var(--accent); text-decoration: none;">Register now</a></p>
+        </div>
+    </div>
+    <script src="auth.js"></script>
+</body>
+</html>
