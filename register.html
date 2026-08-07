@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nano Exam - Register</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="login-screen">
+        <div class="login-card" style="max-width: 480px;">
+            <h2>Create Account</h2>
+            <p>Register for Nano Exam Platform</p>
+            
+            <div class="input-group">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" id="reg-name" placeholder="Full Name">
+            </div>
+
+            <div class="input-group">
+                <i class="fa-solid fa-phone"></i>
+                <input type="text" id="reg-phone" placeholder="Phone Number">
+            </div>
+
+            <div class="input-group">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" id="reg-email" placeholder="Email Address">
+            </div>
+            
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="reg-pass" placeholder="Password">
+            </div>
+
+            <div class="input-group">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <input type="text" id="reg-district" placeholder="District">
+            </div>
+
+            <div class="input-group">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <input type="text" id="reg-college" placeholder="College Name">
+            </div>
+
+            <button class="login-btn" onclick="handleRegister()">Sign Up</button>
+            <p style="margin-top: 20px; font-size: 14px;">Already have an account? <a href="login.html" style="color: var(--accent); text-decoration: none;">Login here</a></p>
+        </div>
+    </div>
+    <script src="auth.js"></script>
+</body>
+                    </html>
