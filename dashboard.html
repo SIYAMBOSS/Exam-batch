@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nano Exam - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="dashboard-screen" style="display: block;">
+        <!-- Sidebar / Bottom Nav -->
+        <div class="sidebar">
+            <div class="brand">
+                <i class="fa-solid fa-microchip"></i>
+                <span>Nanotech</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="active" onclick="switchTab('home', event)">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" onclick="switchTab('exam', event)">
+                        <i class="fa-solid fa-file-pen"></i>
+                        <span>Exam</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" onclick="switchTab('profile', event)">
+                        <i class="fa-solid fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" onclick="switchTab('leaderboard', event)">
+                        <i class="fa-solid fa-trophy"></i>
+                        <span>Leaderboard</span>
+                    </a>
+                </li>
+            </ul>
+            <button class="logout-btn" onclick="handleLogout()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </button>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-container">
+            <header class="top-header">
+                <div>
+                    <h1 id="page-title" style="font-size: 20px; font-weight: 600;">Home Dashboard</h1>
+                    <p style="color: var(--text-muted); font-size: 12px;">Welcome back, keep up your preparation.</p>
+                </div>
+                <div class="user-pill" style="display: flex; align-items: center; gap: 10px;">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100" alt="Avatar" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover;">
+                    <span style="font-weight: 600; font-size: 14px;" id="user-display-name">Siyam</span>
+                </div>
+            </header>
+
+            <!-- Home Panel -->
+            <div id="home-panel" class="panel active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+                        <div class="stat-info">
+                            <h3>Total Exams</h3>
+                            <p>12</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="color: #10b981; background: rgba(16, 185, 129, 0.1);"><i class="fa-solid fa-star"></i></div>
+                        <div class="stat-info">
+                            <h3>Average Score</h3>
+                            <p>85%</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="color: #f59e0b; background: rgba(245, 158, 11, 0.1);"><i class="fa-solid fa-ranking-star"></i></div>
+                        <div class="stat-info">
+                            <h3>Leaderboard Rank</h3>
+                            <p>4th</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-card">
+                    <h2 style="font-size: 16px; margin-bottom: 8px;">Notice Board</h2>
+                    <p style="color: var(--text-muted); font-size: 14px;">New model test exam will start tomorrow. Participate on time.</p>
+                </div>
+            </div>
+
+            <!-- Exam Panel -->
+            <div id="exam-panel" class="panel" style="display: none;">
+                <div class="content-card">
+                    <h2 style="font-size: 16px; margin-bottom: 10px;">Ongoing Exams</h2>
+                    <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 15px;">Your subject-wise exam list will appear here with Question Bank & Randomization.</p>
+                    <button style="padding: 10px 20px; background: var(--primary); border: none; border-radius: 8px; color: white; cursor: pointer; font-size: 14px;">Start Exam</button>
+                </div>
+            </div>
+
+            <!-- Profile Panel -->
+            <div id="profile-panel" class="panel" style="display: none;">
+                <div class="content-card" style="max-width: 500px; text-align: center; margin: 0 auto;">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 15px; border: 3px solid var(--primary);">
+                    <h2 style="font-size: 18px;" id="profile-name">Siyam</h2>
+                    <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 15px;" id="profile-email">siyam19065@gmail.com</p>
+                    <div style="background: rgba(15, 23, 42, 0.4); padding: 12px; border-radius: 12px; border: 1px solid var(--border-color); text-align: left; font-size: 13px;">
+                        <p style="margin-bottom: 6px;">Phone: <span id="profile-phone" style="color: var(--text-main);">017XXXXXXXX</span></p>
+                        <p style="margin-bottom: 6px;">District: <span id="profile-district" style="color: var(--text-main);">Dhaka</span></p>
+                        <p>College: <span id="profile-college" style="color: var(--text-main);">ABC College</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leaderboard Panel -->
+            <div id="leaderboard-panel" class="panel" style="display: none;">
+                <div class="content-card">
+                    <h2 style="font-size: 16px; margin-bottom: 10px;">Top Scorers List</h2>
+                    <p style="color: var(--text-muted); font-size: 14px;">Rankings with speed-based and auto-graded results will be displayed here.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
